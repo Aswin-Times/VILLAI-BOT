@@ -25,6 +25,7 @@ dev = [
     "mypy>=1.11",
     "types-pyyaml>=6.0",
     "httpx2>=2.16.2",
+    "hypothesis>=6.170.15",
 ]
 
 [tool.uv]
