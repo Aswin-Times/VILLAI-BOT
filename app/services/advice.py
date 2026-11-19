@@ -105,6 +105,7 @@ def get_advice(
     today: date,
     fleet: tuple[Vehicle, ...] | None = None,
     glut_thresholds: GlutThresholds = DEFAULT_GLUT_THRESHOLDS,
+    farmer_id: int | None = None,
 ) -> AdviceResponse:
     commodity = resolve_commodity(session, req.commodity)
     if commodity is None:
@@ -146,7 +147,10 @@ def get_advice(
         "warnings": warnings,
     }
     rec = Recommendation(
-        request=req.model_dump(mode="json"), result={}, data_as_of=ranking.data_as_of
+        farmer_id=farmer_id,
+        request=req.model_dump(mode="json"),
+        result={},
+        data_as_of=ranking.data_as_of,
     )
     session.add(rec)
     session.flush()  # assigns rec.id
