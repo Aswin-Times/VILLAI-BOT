@@ -2,7 +2,7 @@
 
 Short records of choices that aren't obvious from the code or the plan.
 
-**D-001 · One branch per phase.** Work happens on `phase-N-...` branches, pushed after every
+**D-001· One branch per phase.** Work happens on `phase-N-...` branches, pushed after every
 verified step. `main` only changes through merges.
 
 **D-002 · Phase 1 started before Phase 0 closed** (approved 19 Nov 2026). Phase 0 is blocked on
@@ -24,3 +24,11 @@ small lots. They aren't in the markets seed, and ingestion drops them.
 **D-006 · Tests run on SQLite locally and on Postgres 16 in CI.** Docker isn't on the dev
 machine. Models use portable types (JSON becomes JSONB on Postgres), and CI runs the whole
 suite on both. `TEST_DATABASE_URL` switches the suite to Postgres.
+
+**D-007 · Demo data is quarantined.** `app.data.demo` writes invented prices so the API (and
+the Phase 2 bot) can be exercised without API keys. Rows carry `source="demo"`, and the loader
+refuses any database that isn't SQLite.
+
+**D-008 · Unverified crop mappings are served with a warning, not hidden.** Small onion and
+banana mappings aren't confirmed yet (see PHASE0_DATA.md §4). `/v1/advice` still answers but
+adds `commodity_mapping_unverified`; the bot must not present those prices as confirmed.
