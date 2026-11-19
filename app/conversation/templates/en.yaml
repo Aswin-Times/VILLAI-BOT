@@ -1,0 +1,101 @@
+# English replies. Every number comes from the engine via the renderer.
+# Keep each message short: farmers read these on a phone.
+
+welcome: |-
+  Vanakkam! 🙏 I'm Vilai. I tell you which mandi pays the most after transport.
+  வணக்கம்! 🙏 நான் விலை. போக்குவரத்து செலவுக்குப் பிறகு எந்த சந்தை அதிகம் தரும் என்று சொல்வேன்.
+  Reply 1 for தமிழ் · 2 for English
+
+language_prompt: |-
+  Choose a language: 1 தமிழ் · 2 English
+
+consent: |-
+  To advise you I need to save your phone number, your farm location and your crops. I use them only for mandi advice, and you can ask me to delete them at any time.
+  Reply YES to continue.
+
+consent_declined: |-
+  OK, I haven't saved anything. Send "hi" any time to start again.
+
+ask_location: |-
+  Where is your farm? Share your location 📍 (tap 📎 → Location) or type your nearest town.
+
+location_not_understood: |-
+  Sorry, I couldn't find that place. Share your location 📍 or type a nearby town, for example Dindigul.
+
+ask_crops: |-
+  Which crops do you grow? I can help with: {{ crop_list }}.
+
+crops_not_understood: |-
+  Sorry, I didn't catch the crop. I can help with: {{ crop_list }}.
+
+onboarded: |-
+  Saved ✅ Crops: {{ crops }}. Location: {{ place }}.
+  Ask me any time, for example "20 quintal tomato".
+
+ask_crop: |-
+  Which crop do you want to sell? {{ crop_list }}
+
+ask_quantity: |-
+  How much {{ crop }} do you have? For example "20 quintal" or "500 kg".
+
+unit_not_understood: |-
+  Sorry, I couldn't use that quantity. Please send it in quintal, kg or tonne, for example "20 quintal".
+
+confirm_query: |-
+  Confirm: {{ crop }}, {{ quantity }}, from {{ place }}. Correct?
+  1 Yes · 2 Change
+
+change_what: |-
+  OK. Send the crop, quantity and place again, for example "20 quintal tomato, Dindigul".
+
+advice: |-
+  {{ crop }} · {{ quantity }} · prices as of {{ as_of }}
+  {% for o in options %}
+  {{ loop.index }}. {{ o.market }} — ₹{{ o.modal }}/q · {{ o.km }} km → you keep ≈ ₹{{ o.net }}/q (≈ ₹{{ o.total }}){% if o.stale %} · old data ({{ o.date }}){% endif %}
+
+  {% endfor %}
+  {% if glut %}
+  ⚠ {{ glut.market }}: arrivals {{ glut.pct }}% above normal — prices may soften.
+  {% endif %}
+  {% if regional_glut %}
+  ⚠ Arrivals are high at several nearby mandis — prices may soften.
+  {% endif %}
+  {% if extra %}
+  {{ best }} gives ≈ ₹{{ extra }} more than the nearest mandi ({{ nearest }}).
+  {% endif %}
+  {% if stale %}
+  ⓘ No mandi nearby has reported in the last 3 days, so there is no top pick. Check before you go.
+  {% endif %}
+  {% if unverified %}
+  ⓘ Prices for this crop are still being checked.
+  {% endif %}
+
+no_data: |-
+  {{ crop }}: no mandi near {{ place }} has reported a price in the last 2 weeks, so I won't guess. Please try again tomorrow.
+
+price: |-
+  {{ crop }} at {{ market }}: ₹{{ modal }}/q (₹{{ low }}–{{ high }}) · {{ date }}
+
+price_no_data: |-
+  {{ crop }} at {{ market }}: no price reported in the last 2 weeks.
+
+price_which_market: |-
+  Which mandi? For example "price {{ crop }} Oddanchatram".
+
+help: |-
+  I can help with:
+  • Where to sell: "20 quintal tomato"
+  • One mandi's price: "price tomato Oddanchatram"
+  • "change crops" · "change location" · "language"
+
+alerts_coming_soon: |-
+  Daily price alerts are coming soon.
+
+audio_coming_soon: |-
+  Voice notes are coming soon. Please type your question for now.
+
+unknown: |-
+  Sorry, I didn't understand. Try "20 quintal tomato" or send "help".
+
+disclaimer: |-
+  ⓘ Prices come from government mandi reports (Agmarknet) and can change. Use this as a guide, not a guarantee.
