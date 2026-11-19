@@ -1,0 +1,72 @@
+# Pilot commodities and how they map to Agmarknet (data.gov.in) names.
+#
+# Prices are always stored in ₹/quintal. `agmarknet_varieties: []` means any
+# variety of that Agmarknet commodity counts. `mapping_verified: false` means
+# the mapping still needs checking against a full day of real data (Phase 0).
+#
+# Synonyms are matched after lower-casing and whitespace normalisation. Keep
+# generic words (e.g. "onion", "vengayam") out: they're ambiguous between
+# small and big onion, so the bot should ask rather than guess.
+
+- code: tomato
+  name_en: Tomato
+  name_ta: தக்காளி
+  agmarknet_commodity: Tomato
+  agmarknet_varieties: []          # seen: Deshi, Hybrid, Local, Other
+  mapping_verified: true
+  storable: false
+  pack_weights_kg:
+    crate: 25                      # confirm locally (plan §12 Q4)
+  synonyms: [tomato, tomatoes, thakkali, thakali, takkali, தக்காளி]
+
+- code: small_onion
+  name_en: Small onion
+  name_ta: சின்ன வெங்காயம்
+  agmarknet_commodity: Onion
+  # Agmarknet files small onion (shallot) and big onion (Bellary) under the same
+  # commodity. Which variety names mean small onion in TN still has to be
+  # confirmed with a full pull; Bellary is definitely big onion.
+  agmarknet_varieties: []
+  exclude_varieties: [Bellary, Big, Pusa-Red, Nasik, Red]
+  mapping_verified: false
+  storable: true
+  storage_loss_pct_per_week: 2.0   # placeholder: shrinkage + rot in ventilated storage
+  pack_weights_kg:
+    bag: 50                        # confirm locally
+  synonyms:
+    - small onion
+    - small onions
+    - shallot
+    - shallots
+    - sambar onion
+    - chinna vengayam
+    - chinna vengaayam
+    - sinna vengayam
+    - sambar vengayam
+    - சின்ன வெங்காயம்
+    - சின்னவெங்காயம்
+    - சாம்பார் வெங்காயம்
+
+- code: turmeric
+  name_en: Turmeric
+  name_ta: மஞ்சள்
+  agmarknet_commodity: Turmeric
+  agmarknet_varieties: [Finger, Bulb]   # priced differently; compare like with like
+  mapping_verified: true
+  storable: true
+  storage_loss_pct_per_week: 0.2   # placeholder: dried turmeric stores well
+  pack_weights_kg:
+    bag: 70                        # confirm locally
+  synonyms: [turmeric, manjal, manjal kizhangu, haldi, மஞ்சள், மஞ்சள் கிழங்கு]
+
+- code: banana
+  name_en: Banana
+  name_ta: வாழை
+  agmarknet_commodity: Banana
+  # Ripe-banana varieties (Poovan, Red Banana, Nendran, Rasthali, ...). Prices
+  # differ a lot by variety, so the bot must ask which one. Raw/green banana
+  # (வாழைக்காய்) is a separate Agmarknet commodity, "Banana - Green", not in the pilot.
+  agmarknet_varieties: []
+  mapping_verified: false          # units: confirm all TN markets report ₹/quintal
+  storable: false
+  synonyms: [banana, bananas, vazhai, vaazhai, valai, vazhaipazham, vaazhaipazham, வாழை, வாழைப்பழம்]

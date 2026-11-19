@@ -1,0 +1,94 @@
+# Golden intent set: farmer message -> expected parse.
+#
+# Written BEFORE the parser, to measure it honestly. Fields left out of
+# `expect` must parse as null, except location_text, which is only compared
+# when given. Units are normalised: quintal | kg | tonne | bag | crate.
+# Crops: tomato | small_onion | turmeric | banana. Markets: seed codes.
+# "onion"/"vengayam" alone is ambiguous (small vs big onion): commodity null.
+#
+# Tamil wording should be reviewed by a native speaker (plan §3.1).
+
+# ---------- advice: English ----------
+- {text: "20 quintal tomato", lang: en, expect: {intent: advice, commodity: tomato, quantity: 20, unit: quintal}}
+- {text: "where to sell 15 quintals of turmeric", lang: en, expect: {intent: advice, commodity: turmeric, quantity: 15, unit: quintal}}
+- {text: "I have 2 tonnes of banana near Udumalpet", lang: en, expect: {intent: advice, commodity: banana, quantity: 2, unit: tonne, location_text: udumalpet}}
+- {text: "small onion 30 bags", lang: en, expect: {intent: advice, commodity: small_onion, quantity: 30, unit: bag}}
+- {text: "500 kg tomatoes, which mandi is best?", lang: en, expect: {intent: advice, commodity: tomato, quantity: 500, unit: kg}}
+- {text: "best market for turmeric", lang: en, expect: {intent: advice, commodity: turmeric}}
+- {text: "sell 10 qtl tomato from Dindigul", lang: en, expect: {intent: advice, commodity: tomato, quantity: 10, unit: quintal, location_text: dindigul}}
+- {text: "where should I sell my bananas", lang: en, expect: {intent: advice, commodity: banana}}
+- {text: "20q shallots", lang: en, expect: {intent: advice, commodity: small_onion, quantity: 20, unit: quintal}}
+- {text: "twenty quintals of tomato", lang: en, expect: {intent: advice, commodity: tomato, quantity: 20, unit: quintal}}
+- {text: "1.5 tonne turmeric", lang: en, expect: {intent: advice, commodity: turmeric, quantity: 1.5, unit: tonne}}
+- {text: "50 crates tomato", lang: en, expect: {intent: advice, commodity: tomato, quantity: 50, unit: crate}}
+
+# ---------- advice: transliterated Tamil ----------
+- {text: "20 quintal chinna vengayam, Dindigul pakkam", lang: translit, expect: {intent: advice, commodity: small_onion, quantity: 20, unit: quintal, location_text: dindigul}}
+- {text: "thakkali 10 quintal enga vikkalam", lang: translit, expect: {intent: advice, commodity: tomato, quantity: 10, unit: quintal}}
+- {text: "manjal 25 quintal irukku", lang: translit, expect: {intent: advice, commodity: turmeric, quantity: 25, unit: quintal}}
+- {text: "vazhai 1 ton Udumalai pakkam", lang: translit, expect: {intent: advice, commodity: banana, quantity: 1, unit: tonne, location_text: udumalai}}
+- {text: "50 mootai chinna vengayam", lang: translit, expect: {intent: advice, commodity: small_onion, quantity: 50, unit: bag}}
+- {text: "irubathu quintal thakkali", lang: translit, expect: {intent: advice, commodity: tomato, quantity: 20, unit: quintal}}
+- {text: "sambar vengayam 40 quintal Perambalur pakkam", lang: translit, expect: {intent: advice, commodity: small_onion, quantity: 40, unit: quintal, location_text: perambalur}}
+- {text: "thakkali enga nalla vilai kidaikkum", lang: translit, expect: {intent: advice, commodity: tomato}}
+- {text: "manjal vikkanum, Erode pakkam", lang: translit, expect: {intent: advice, commodity: turmeric, location_text: erode}}
+- {text: "300 kilo thakkali", lang: translit, expect: {intent: advice, commodity: tomato, quantity: 300, unit: kg}}
+- {text: "vaazhaipazham 15 quintal", lang: translit, expect: {intent: advice, commodity: banana, quantity: 15, unit: quintal}}
+- {text: "aimbathu mootai manjal", lang: translit, expect: {intent: advice, commodity: turmeric, quantity: 50, unit: bag}}
+- {text: "chinna vengayam 2.5 ton", lang: translit, expect: {intent: advice, commodity: small_onion, quantity: 2.5, unit: tonne}}
+- {text: "thakkali 100 petti Oddanchatram pakkam", lang: translit, expect: {intent: advice, commodity: tomato, quantity: 100, unit: crate, location_text: oddanchatram}}
+
+# ---------- advice: Tamil script ----------
+- {text: "இருபது குவிண்டால் சின்ன வெங்காயம் இருக்கு, எங்க விக்கலாம்?", lang: ta, expect: {intent: advice, commodity: small_onion, quantity: 20, unit: quintal}}
+- {text: "தக்காளி 10 குவிண்டால்", lang: ta, expect: {intent: advice, commodity: tomato, quantity: 10, unit: quintal}}
+- {text: "மஞ்சள் 30 குவிண்டால் ஈரோடு பக்கம்", lang: ta, expect: {intent: advice, commodity: turmeric, quantity: 30, unit: quintal, location_text: "ஈரோடு"}}
+- {text: "வாழைப்பழம் 2 டன் விற்கணும்", lang: ta, expect: {intent: advice, commodity: banana, quantity: 2, unit: tonne}}
+- {text: "500 கிலோ தக்காளி எங்க விக்கலாம்", lang: ta, expect: {intent: advice, commodity: tomato, quantity: 500, unit: kg}}
+- {text: "சின்ன வெங்காயம் 40 மூட்டை", lang: ta, expect: {intent: advice, commodity: small_onion, quantity: 40, unit: bag}}
+- {text: "தக்காளி எங்கே நல்ல விலை கிடைக்கும்?", lang: ta, expect: {intent: advice, commodity: tomato}}
+- {text: "மஞ்சள் விற்க சிறந்த சந்தை எது", lang: ta, expect: {intent: advice, commodity: turmeric}}
+- {text: "பத்து குவிண்டால் வாழை", lang: ta, expect: {intent: advice, commodity: banana, quantity: 10, unit: quintal}}
+- {text: "திண்டுக்கல் பக்கம் 15 குவிண்டால் தக்காளி", lang: ta, expect: {intent: advice, commodity: tomato, quantity: 15, unit: quintal, location_text: "திண்டுக்கல்"}}
+
+# ---------- advice: code-mixed ----------
+- {text: "Sir 20 quintal thakkali irukku, best mandi enna?", lang: mixed, expect: {intent: advice, commodity: tomato, quantity: 20, unit: quintal}}
+- {text: "tomato 10 quintal sell panna enga pogalam", lang: mixed, expect: {intent: advice, commodity: tomato, quantity: 10, unit: quintal}}
+- {text: "turmeric 25 qtl Erode side", lang: mixed, expect: {intent: advice, commodity: turmeric, quantity: 25, unit: quintal, location_text: erode}}
+- {text: "banana 1 ton, Pollachi area", lang: mixed, expect: {intent: advice, commodity: banana, quantity: 1, unit: tonne, location_text: pollachi}}
+- {text: "small onion 20 quintal Dindigul la irundhu", lang: mixed, expect: {intent: advice, commodity: small_onion, quantity: 20, unit: quintal, location_text: dindigul}}
+- {text: "தக்காளி 20 quintal sell pannanum", lang: mixed, expect: {intent: advice, commodity: tomato, quantity: 20, unit: quintal}}
+
+# ---------- price at one mandi ----------
+- {text: "price tomato Oddanchatram", lang: en, expect: {intent: price, commodity: tomato, market: oddanchatram}}
+- {text: "Oddanchatram la thakkali vilai enna", lang: translit, expect: {intent: price, commodity: tomato, market: oddanchatram}}
+- {text: "ஒட்டன்சத்திரம் தக்காளி விலை", lang: ta, expect: {intent: price, commodity: tomato, market: oddanchatram}}
+- {text: "turmeric rate in Erode", lang: en, expect: {intent: price, commodity: turmeric, market: erode}}
+- {text: "Erode manjal vilai", lang: translit, expect: {intent: price, commodity: turmeric, market: erode}}
+- {text: "today tomato price Dindigul market", lang: en, expect: {intent: price, commodity: tomato, market: dindigul}}
+- {text: "பழனி வாழை விலை என்ன", lang: ta, expect: {intent: price, commodity: banana, market: palani}}
+- {text: "thakkali rate enna", lang: translit, expect: {intent: price, commodity: tomato}}
+
+# ---------- commands ----------
+- {text: "help", lang: en, expect: {intent: help}}
+- {text: "உதவி", lang: ta, expect: {intent: help}}
+- {text: "ALERT", lang: en, expect: {intent: alert}}
+- {text: "stop", lang: en, expect: {intent: stop}}
+- {text: "change crops", lang: en, expect: {intent: change_crops}}
+- {text: "பயிர் மாற்று", lang: ta, expect: {intent: change_crops}}
+- {text: "change location", lang: en, expect: {intent: change_location}}
+- {text: "language", lang: en, expect: {intent: language}}
+- {text: "மொழி", lang: ta, expect: {intent: language}}
+- {text: "vanakkam", lang: translit, expect: {intent: greeting}}
+- {text: "hi", lang: en, expect: {intent: greeting}}
+- {text: "1", lang: en, expect: {intent: "yes"}}
+- {text: "ஆம்", lang: ta, expect: {intent: "yes"}}
+- {text: "sari", lang: translit, expect: {intent: "yes"}}
+- {text: "yes", lang: en, expect: {intent: "yes"}}
+- {text: "2", lang: en, expect: {intent: "no"}}
+- {text: "இல்லை", lang: ta, expect: {intent: "no"}}
+
+# ---------- unclear / unknown ----------
+- {text: "what's the weather tomorrow", lang: en, expect: {intent: unknown}}
+- {text: "en peru Murugan", lang: translit, expect: {intent: unknown}}
+- {text: "onion 20 quintal", lang: en, expect: {intent: advice, quantity: 20, unit: quintal}}
+- {text: "vengayam 30 mootai", lang: translit, expect: {intent: advice, quantity: 30, unit: bag}}

@@ -1,0 +1,16 @@
+code,name,name_ta,district,agmarknet_district,lat,lon,agmarknet_names,aliases,market_type,deductions_pct,verified,notes
+oddanchatram,Oddanchatram,ஒட்டன்சத்திரம்,Dindigul,Dindigul,10.4870,77.7480,Oddanchatram;Oddunchairum,oddanchatram;odanchatram;ottanchathiram;ஒட்டன்சத்திரம்,wholesale,0.08,false,"Big vegetable market; older Agmarknet rows spell it Oddunchairum"
+dindigul,Dindigul,திண்டுக்கல்,Dindigul,Dindigul,10.3624,77.9695,Dindigul,dindigul;dindukal;thindukkal;திண்டுக்கல்,wholesale,0.08,false,
+palani,Palani,பழனி,Dindigul,Dindigul,10.4500,77.5161,Palani,palani;pazhani;பழனி,wholesale,0.08,false,"Palani(Uzhavar Sandhai ) is a different, retail market"
+coimbatore,Coimbatore,கோயம்புத்தூர்,Coimbatore,Coimbatore,11.0168,76.9558,Coimbatore,coimbatore;kovai;கோயம்புத்தூர்;கோவை,wholesale,0.08,false,
+mettupalayam,Mettupalayam,மேட்டுப்பாளையம்,Coimbatore,Coimbatore,11.2995,76.9350,Mettupalayam,mettupalayam;மேட்டுப்பாளையம்,wholesale,0.08,false,
+pollachi,Pollachi,பொள்ளாச்சி,Coimbatore,Coimbatore,10.6580,77.0080,Pollachi,pollachi;பொள்ளாச்சி,wholesale,0.08,false,
+udumalpet,Udumalpet,உடுமலைப்பேட்டை,Tiruppur,Thiruppur,10.5850,77.2480,Udumalpettai RM;Udumalpet,udumalpet;udumalpettai;udumalai;உடுமலைப்பேட்டை;உடுமலை,regulated,0.01,false,"Seen reporting banana on 18 Nov 2026"
+tiruppur,Tiruppur,திருப்பூர்,Tiruppur,Thiruppur,11.1085,77.3411,Tiruppur,tiruppur;tirupur;thiruppur;திருப்பூர்,wholesale,0.08,false,
+erode,Erode,ஈரோடு,Erode,Erode,11.3410,77.7172,Erode,erode;ஈரோடு,regulated,0.01,false,"Main turmeric market; reports Finger and Bulb"
+namagiripettai,Namagiripettai,நாமகிரிப்பேட்டை,Namakkal,Namakkal,11.4558,78.2683,Namagiripettai,namagiripettai;நாமகிரிப்பேட்டை,regulated,0.01,false,"Turmeric market seen in history"
+salem,Salem,சேலம்,Salem,Salem,11.6643,78.1460,Salem,salem;சேலம்,wholesale,0.08,false,
+perambalur,Perambalur,பெரம்பலூர்,Perambalur,Perambalur,11.2333,78.8833,Perambalur,perambalur;பெரம்பலூர்,wholesale,0.08,false,"Small onion growing belt"
+madurai,Madurai,மதுரை,Madurai,Madurai,9.9252,78.1198,Madurai,madurai;மதுரை,wholesale,0.08,false,
+krishnagiri,Krishnagiri,கிருஷ்ணகிரி,Krishnagiri,Krishnagiri,12.5186,78.2138,Krishnagiri,krishnagiri;கிருஷ்ணகிரி,wholesale,0.08,false,
+hosur,Hosur,ஓசூர்,Krishnagiri,Krishnagiri,12.7409,77.8253,Hosur,hosur;ஓசூர்,wholesale,0.08,false,

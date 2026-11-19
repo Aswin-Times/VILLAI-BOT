@@ -1,0 +1,42 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Local data (raw downloads stay out of git; curated seed files live in app/data/seed/)
+data/raw/
+data/cache/
+*.sqlite
+*.db
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Node (dashboard, later)
+node_modules/
+.next/
+
+# Local preview config (machine-specific paths)
+.claude/launch.json

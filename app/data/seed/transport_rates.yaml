@@ -1,0 +1,26 @@
+# Vehicle hire for a round trip: farm -> mandi -> back.
+#   trip cost = max(min_charge, rate_per_km * 2 * one_way_road_km)
+# Loads above the biggest vehicle need several trips.
+#
+# PLACEHOLDERS: replace with quotes from 3-4 local farmers/transporters
+# (plan §12 Q3). A farmer can always override with their own rate.
+verified: false
+vehicles:
+  - code: tempo
+    name_en: Tempo (small pickup)
+    name_ta: டெம்போ
+    capacity_quintals: 10
+    rate_per_km: 14
+    min_charge: 700
+  - code: mini_truck
+    name_en: Mini truck
+    name_ta: சிறிய லாரி
+    capacity_quintals: 30
+    rate_per_km: 22
+    min_charge: 1500
+  - code: truck
+    name_en: Lorry
+    name_ta: லாரி
+    capacity_quintals: 90
+    rate_per_km: 35
+    min_charge: 3000
