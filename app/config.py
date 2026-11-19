@@ -11,3 +11,4 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql+psycopg://vilai:vilai@localhost:5432/vilai"
     datagov_api_key: SecretStr | None = None
+    ceda_api_key: SecretStr | None = None

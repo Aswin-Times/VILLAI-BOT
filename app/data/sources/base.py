@@ -45,3 +45,11 @@ class PriceSource(Protocol):
     def fetch(
         self, *, day: date, commodities: Sequence[str], state: str = "Tamil Nadu"
     ) -> list[PriceObservation]: ...
+
+
+class HistorySource(Protocol):
+    name: str
+
+    def fetch_history(
+        self, *, district: str, commodity: str, state: str = "Tamil Nadu"
+    ) -> list[PriceObservation]: ...

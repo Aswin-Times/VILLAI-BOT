@@ -6,7 +6,7 @@ The full plan and architecture are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.m
 
 ## Status
 
-Phase 0, the data spike, is in progress. See the delivery plan in §9 of the project plan.
+Phase 0, the data spike, is in progress. What we've verified about the data sources, the open risks and the steps left are in [docs/PHASE0_DATA.md](docs/PHASE0_DATA.md). The delivery plan is in §9 of the project plan.
 
 ## Ground rules
 

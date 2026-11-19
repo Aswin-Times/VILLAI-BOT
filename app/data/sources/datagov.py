@@ -92,6 +92,17 @@ class DataGovSource:
             out.extend(self._fetch_all(filters))
         return out
 
+    def fetch_history(
+        self, *, district: str, commodity: str, state: str = "Tamil Nadu"
+    ) -> list[PriceObservation]:
+        """Every row for one district and commodity, across all dates."""
+        filters = {
+            "filters[State]": state,
+            "filters[District]": district,
+            "filters[Commodity]": commodity,
+        }
+        return self._fetch_all(filters)
+
     def _fetch_all(self, filters: dict[str, str]) -> list[PriceObservation]:
         out: list[PriceObservation] = []
         offset = 0

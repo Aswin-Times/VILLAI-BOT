@@ -107,6 +107,20 @@ def test_sends_state_commodity_and_date_filters() -> None:
     assert params["format"] == "json"
 
 
+def test_history_filters_by_district_and_commodity_across_all_dates() -> None:
+    seen: list[httpx.Request] = []
+    source = make_source(paged_handler(load_fixture(), seen), page_size=4)
+
+    obs = source.fetch_history(district="Dindigul", commodity="Tomato")
+
+    assert len(obs) == 10
+    params = seen[0].url.params
+    assert params["filters[State]"] == "Tamil Nadu"
+    assert params["filters[District]"] == "Dindigul"
+    assert params["filters[Commodity]"] == "Tomato"
+    assert "filters[Arrival_Date]" not in params
+
+
 def test_fetches_each_commodity_separately() -> None:
     seen: list[httpx.Request] = []
     source = make_source(paged_handler(load_fixture(), seen))
