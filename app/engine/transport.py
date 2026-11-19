@@ -27,8 +27,8 @@ def plan_trips(quantity_q: float, fleet: Sequence[Vehicle]) -> list[Vehicle]:
     while remaining > largest.capacity_quintals:
         trips.append(largest)
         remaining -= largest.capacity_quintals
-    if remaining > 0:
-        trips.append(next(v for v in by_size if v.capacity_quintals >= remaining))
+    # 0 < remaining <= largest capacity here, so some vehicle always fits.
+    trips.append(next(v for v in by_size if v.capacity_quintals >= remaining))
     return trips
 
 

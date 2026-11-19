@@ -37,3 +37,5 @@ jobs:
         run: uv run pytest --cov=app --cov-report=term-missing
       - name: Tests on SQLite
         run: uv run pytest
+      - name: Engine coverage (must stay at or above 90%)
+        run: uv run pytest tests/engine --cov=app/engine --cov-branch --cov-fail-under=90
