@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import logging
+
+import anthropic
 from fastapi import FastAPI
 
 from app.api import advice, reference, webhooks_twilio
@@ -12,6 +15,7 @@ from app.clock import today_ist
 from app.config import Settings
 from app.conversation.geocode import ReferenceGeocoder
 from app.conversation.intents import IntentParser
+from app.conversation.llm_parser import AnthropicIntentParser
 from app.conversation.rules_parser import RulesParser
 from app.db import make_engine, make_sessionmaker
 
@@ -26,7 +30,20 @@ def build_channel(settings: Settings) -> Channel:
     return LoggingChannel()
 
 
+log = logging.getLogger("vilai")
+
+
 def build_parser(settings: Settings, rules: RulesParser) -> IntentParser:
+    if settings.intent_provider == "anthropic":
+        if settings.anthropic_api_key is None:
+            log.warning("INTENT_PROVIDER=anthropic but ANTHROPIC_API_KEY is not set; using rules")
+            return rules
+        client = anthropic.Anthropic(
+            api_key=settings.anthropic_api_key.get_secret_value(),
+            timeout=8.0,  # the farmer is waiting; rules answer if Claude is slow
+            max_retries=1,
+        )
+        return AnthropicIntentParser(client)
     return rules
 
 
