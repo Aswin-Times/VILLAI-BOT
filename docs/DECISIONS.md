@@ -2,7 +2,7 @@
 
 Short records of choices that aren't obvious from the code or the plan.
 
-**D-001· One branch per phase.** Work happens on `phase-N-...` branches, pushed after every
+**D-001 · One branch per phase.** Work happens on `phase-N-...` branches, pushed after every
 verified step. `main` only changes through merges.
 
 **D-002 · Phase 1 started before Phase 0 closed** (approved 19 Nov 2026). Phase 0 is blocked on
