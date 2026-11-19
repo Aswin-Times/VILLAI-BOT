@@ -158,6 +158,14 @@ class RulesParser:
             )
         return ParsedIntent(intent="unknown")
 
+    def crops_in(self, text: str) -> list[str]:
+        """Every pilot crop named in the text, in order, without repeats."""
+        codes: list[str] = []
+        for _pos, term, _matched in _find(_clean(text), self._crops):
+            if term.value not in codes:
+                codes.append(term.value)
+        return codes
+
     def _quantity(self, tokens: list[str]) -> tuple[float | None, Unit | None]:
         for i, tok in enumerate(tokens):
             nxt = tokens[i + 1] if i + 1 < len(tokens) else ""

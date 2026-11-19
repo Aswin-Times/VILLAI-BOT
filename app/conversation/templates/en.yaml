@@ -16,6 +16,9 @@ consent: |-
 consent_declined: |-
   OK, I haven't saved anything. Send "hi" any time to start again.
 
+your_location: |-
+  your location
+
 ask_location: |-
   Where is your farm? Share your location 📍 (tap 📎 → Location) or type your nearest town.
 

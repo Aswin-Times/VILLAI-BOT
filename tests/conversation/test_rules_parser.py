@@ -49,3 +49,9 @@ def test_empty_or_emoji_only_is_unknown(text: str) -> None:
 
 def test_help_inside_a_sentence_is_not_the_help_command() -> None:
     assert PARSER.parse("help me sell 20 quintal tomato").intent == "advice"
+
+
+def test_crops_in_lists_every_crop_once_in_order() -> None:
+    assert PARSER.crops_in("thakkali, manjal and tomato") == ["tomato", "turmeric"]
+    assert PARSER.crops_in("வாழைப்பழம், சின்ன வெங்காயம்") == ["banana", "small_onion"]
+    assert PARSER.crops_in("rice") == []
