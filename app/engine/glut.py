@@ -28,6 +28,9 @@ class GlutThresholds:
     min_history_days: int = 10
 
 
+DEFAULT_GLUT_THRESHOLDS = GlutThresholds()
+
+
 @dataclass(frozen=True)
 class GlutSignal:
     market_code: str
@@ -55,7 +58,7 @@ def detect_glut(
     market_code: str,
     arrivals_by_day: Mapping[date, float],
     day: date,
-    thresholds: GlutThresholds = GlutThresholds(),
+    thresholds: GlutThresholds = DEFAULT_GLUT_THRESHOLDS,
 ) -> GlutSignal:
     today = arrivals_by_day.get(day)
     if today is None:

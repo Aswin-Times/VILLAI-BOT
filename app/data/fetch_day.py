@@ -11,15 +11,14 @@ import sys
 from collections.abc import Sequence
 from datetime import date, datetime, timedelta
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
+from app.clock import IST
 from app.config import Settings
 from app.data.csv_io import write_observations_csv
 from app.data.reference import pilot_source_commodities
 from app.data.sources.base import PriceSource
 from app.data.sources.datagov import DataGovSource
 
-IST = ZoneInfo("Asia/Kolkata")
 DEFAULT_OUT = Path("data/raw")
 
 

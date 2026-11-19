@@ -47,7 +47,8 @@ class RankedMarket:
 
 @dataclass(frozen=True)
 class Ranking:
-    options: list[RankedMarket]
+    candidates: list[RankedMarket]  # every eligible market, in rank order
+    options: list[RankedMarket]  # the top_n candidates shown to the farmer
     best: RankedMarket | None  # None when no fresh quote is available
     nearest: RankedMarket | None  # nearest fresh quote
     extra_vs_nearest: float | None  # ₹ total, best vs nearest
@@ -108,6 +109,7 @@ def rank_markets(
     )
     extra = best.price.total - nearest.price.total if best and nearest else None
     return Ranking(
+        candidates=ordered,
         options=options,
         best=best,
         nearest=nearest,

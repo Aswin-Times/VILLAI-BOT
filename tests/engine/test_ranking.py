@@ -153,6 +153,15 @@ def test_top_n_limits_the_options_shown() -> None:
     assert len(rank(quotes, top_n=3).options) == 3
 
 
+def test_candidates_keep_every_eligible_market_in_rank_order() -> None:
+    quotes = [quote(f"m{i}", 10.40 + i * 0.01, 77.90, 2000 + i) for i in range(5)]
+
+    r = rank(quotes, top_n=2)
+
+    assert len(r.candidates) == 5
+    assert r.options == r.candidates[:2]
+
+
 def test_data_as_of_is_the_newest_date_shown() -> None:
     older = quote("older", 10.43, 77.93, 2600, obs_date=TODAY - timedelta(days=2))
 
