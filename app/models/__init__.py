@@ -17,10 +17,11 @@ from sqlalchemy import (
     Index,
     Numeric,
     String,
+    Text,
     UniqueConstraint,
 )
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 JSONType = JSON().with_variant(JSONB(), "postgresql")
 Money = Numeric(12, 2, asdecimal=False)
@@ -119,7 +120,7 @@ class Recommendation(Base):
     __tablename__ = "recommendations"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    farmer_id: Mapped[int | None]  # FK to farmers arrives with Phase 2
+    farmer_id: Mapped[int | None] = mapped_column(ForeignKey("farmers.id", ondelete="CASCADE"))
     request: Mapped[dict[str, Any]] = mapped_column(JSONType)
     result: Mapped[dict[str, Any]] = mapped_column(JSONType)
     data_as_of: Mapped[date | None] = mapped_column(Date)
@@ -131,3 +132,76 @@ class Setting(Base):
 
     key: Mapped[str] = mapped_column(String(64), primary_key=True)
     value: Mapped[Any] = mapped_column(JSONType)
+
+
+class Farmer(Base):
+    """Created only when the farmer consents. Deleting it removes everything about them."""
+
+    __tablename__ = "farmers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    phone_e164: Mapped[str] = mapped_column(String(20), unique=True)
+    language: Mapped[str] = mapped_column(String(2))
+    lat: Mapped[float | None]
+    lon: Mapped[float | None]
+    pincode: Mapped[str | None] = mapped_column(String(6))
+    place_name: Mapped[str | None] = mapped_column(String(64))
+    consent_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+    crops: Mapped[list[FarmerCrop]] = relationship(cascade="all, delete-orphan")
+    messages: Mapped[list[MessageLog]] = relationship(cascade="all, delete-orphan")
+    conversations: Mapped[list[Conversation]] = relationship(cascade="all, delete-orphan")
+    recommendations: Mapped[list[Recommendation]] = relationship(cascade="all, delete-orphan")
+
+
+class FarmerCrop(Base):
+    __tablename__ = "farmer_crops"
+
+    farmer_id: Mapped[int] = mapped_column(
+        ForeignKey("farmers.id", ondelete="CASCADE"), primary_key=True
+    )
+    commodity_id: Mapped[int] = mapped_column(ForeignKey("commodities.id"), primary_key=True)
+
+
+class Conversation(Base):
+    """Where a phone number is in the chat flow.
+
+    Keyed by a keyed hash of the phone number so it can exist before consent
+    without storing the number. `farmer_id` is set once the farmer consents.
+    """
+
+    __tablename__ = "conversations"
+
+    phone_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    farmer_id: Mapped[int | None] = mapped_column(ForeignKey("farmers.id", ondelete="CASCADE"))
+    state: Mapped[str] = mapped_column(String(32))
+    language: Mapped[str | None] = mapped_column(String(2))
+    slots: Mapped[dict[str, Any]] = mapped_column(JSONType, default=dict)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=_now, onupdate=_now
+    )
+
+
+class MessageLog(Base):
+    """Messages of consented farmers only."""
+
+    __tablename__ = "messages"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    farmer_id: Mapped[int] = mapped_column(ForeignKey("farmers.id", ondelete="CASCADE"))
+    direction: Mapped[str] = mapped_column(String(3))  # in | out
+    kind: Mapped[str] = mapped_column(String(16))  # text | audio | location
+    body: Mapped[str | None] = mapped_column(Text)
+    media_url: Mapped[str | None] = mapped_column(Text)
+    parsed: Mapped[dict[str, Any] | None] = mapped_column(JSONType)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
+
+
+class InboundReceipt(Base):
+    """Twilio message SIDs already handled, so webhook retries aren't processed twice."""
+
+    __tablename__ = "inbound_receipts"
+
+    message_sid: Mapped[str] = mapped_column(String(64), primary_key=True)
+    received_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=_now)
