@@ -1,0 +1,198 @@
+{
+ "index_name": "35985678-0d79-46b4-9ed6-6f13308a1d24",
+ "title": "Variety-wise Daily Market Prices Data of Commodity",
+ "updated_date": "2026-11-18T23:34:24Z",
+ "field": [
+  {
+   "name": "Arrival_Date",
+   "id": "Arrival_Date",
+   "type": "date"
+  },
+  {
+   "name": "Commodity",
+   "id": "Commodity",
+   "type": "keyword"
+  },
+  {
+   "name": "Commodity_Code",
+   "id": "Commodity_Code",
+   "type": "keyword"
+  },
+  {
+   "name": "District",
+   "id": "District",
+   "type": "keyword"
+  },
+  {
+   "name": "Grade",
+   "id": "Grade",
+   "type": "keyword"
+  },
+  {
+   "name": "Market",
+   "id": "Market",
+   "type": "keyword"
+  },
+  {
+   "name": "Max_Price",
+   "id": "Max_Price",
+   "type": "keyword"
+  },
+  {
+   "name": "Min_Price",
+   "id": "Min_Price",
+   "type": "keyword"
+  },
+  {
+   "name": "Modal_Price",
+   "id": "Modal_Price",
+   "type": "keyword"
+  },
+  {
+   "name": "State",
+   "id": "State",
+   "type": "keyword"
+  },
+  {
+   "name": "Variety",
+   "id": "Variety",
+   "type": "keyword"
+  }
+ ],
+ "total": 185,
+ "count": 10,
+ "limit": "10",
+ "offset": "0",
+ "records": [
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Thiruchirappalli",
+   "Grade": "Local",
+   "Market": "Manapparai(Uzhavar Sandhai )",
+   "Max_Price": 3000,
+   "Min_Price": 3000,
+   "Modal_Price": 3000,
+   "State": "Tamil Nadu",
+   "Variety": "Other"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Tirunelveli",
+   "Grade": "Local",
+   "Market": "Kandiyaperi(Uzhavar Sandhai )",
+   "Max_Price": 4400,
+   "Min_Price": 4200,
+   "Modal_Price": 4300,
+   "State": "Tamil Nadu",
+   "Variety": "Other"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Erode",
+   "Grade": "Local",
+   "Market": "Sampath Nagar(Uzhavar Sandhai )",
+   "Max_Price": 3200,
+   "Min_Price": 3000,
+   "Modal_Price": 3100,
+   "State": "Tamil Nadu",
+   "Variety": "Other"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Kancheepuram",
+   "Grade": "Local",
+   "Market": "Kundrathur(Uzhavar Sandhai )",
+   "Max_Price": 3000,
+   "Min_Price": 3000,
+   "Modal_Price": 3000,
+   "State": "Tamil Nadu",
+   "Variety": "Other"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Dindigul",
+   "Grade": "Local",
+   "Market": "Kodaikkanal(Uzhavar Sandhai)",
+   "Max_Price": 3500,
+   "Min_Price": 3000,
+   "Modal_Price": 3250,
+   "State": "Tamil Nadu",
+   "Variety": "Deshi"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Thirupathur",
+   "Grade": "Local",
+   "Market": "Natrampalli(Uzhavar Sandhai )",
+   "Max_Price": 4000,
+   "Min_Price": 3000,
+   "Modal_Price": 3500,
+   "State": "Tamil Nadu",
+   "Variety": "Deshi"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Thiruvannamalai",
+   "Grade": "Local",
+   "Market": "Arani(Uzhavar Sandhai )",
+   "Max_Price": 3000,
+   "Min_Price": 2500,
+   "Modal_Price": 2750,
+   "State": "Tamil Nadu",
+   "Variety": "Deshi"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Thiruvallur",
+   "Grade": "Local",
+   "Market": "Tiruvallur(Uzhavar Sandhai )",
+   "Max_Price": 3000,
+   "Min_Price": 3000,
+   "Modal_Price": 3000,
+   "State": "Tamil Nadu",
+   "Variety": "Deshi"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Pudukkottai",
+   "Grade": "Local",
+   "Market": "Viralimalai(Uzhavar Sandhai )",
+   "Max_Price": 4000,
+   "Min_Price": 3500,
+   "Modal_Price": 3750,
+   "State": "Tamil Nadu",
+   "Variety": "Deshi"
+  },
+  {
+   "Arrival_Date": "18/11/2026",
+   "Commodity": "Tomato",
+   "Commodity_Code": 78,
+   "District": "Thiruchirappalli",
+   "Grade": "Local",
+   "Market": "Lalgudi(Uzhavar Sandhai )",
+   "Max_Price": 3200,
+   "Min_Price": 3200,
+   "Modal_Price": 3200,
+   "State": "Tamil Nadu",
+   "Variety": "Deshi"
+  }
+ ]
+}
