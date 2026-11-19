@@ -22,6 +22,21 @@ Requires Python 3.12 and [uv](https://docs.astral.sh/uv/).
 cp .env.example .env
 uv sync
 uv run pytest
+uv run ruff check . && uv run mypy app
 ```
 
-Setup for the database and API arrives with Phase 1.
+Run the API with Postgres in Docker:
+
+```bash
+docker compose up -d db
+uv run alembic upgrade head
+uv run uvicorn app.main:app --reload
+```
+
+Without Docker, point `DATABASE_URL` at a local SQLite file (fine for development; production is Postgres):
+
+```bash
+DATABASE_URL=sqlite:///./vilai.db uv run alembic upgrade head
+```
+
+Tests use a throwaway SQLite database. To run them against Postgres, set `TEST_DATABASE_URL` (CI runs both).
