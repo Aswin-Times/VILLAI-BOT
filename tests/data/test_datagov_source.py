@@ -74,6 +74,26 @@ def test_follows_pages_until_total_is_reached() -> None:
     assert [int(r.url.params["offset"]) for r in seen] == [0, 4, 8]
 
 
+def test_advances_by_rows_returned_when_server_caps_page_size() -> None:
+    """The public sample key returns at most 10 rows whatever `limit` asks for."""
+    payload = load_fixture()
+    records = payload["records"]
+    seen: list[httpx.Request] = []
+
+    def capped(request: httpx.Request) -> httpx.Response:
+        seen.append(request)
+        offset = int(request.url.params["offset"])
+        page = dict(payload, total=len(records), records=records[offset : offset + 3])
+        return httpx.Response(200, json=page)
+
+    source = make_source(capped, page_size=1000)
+
+    obs = source.fetch(day=date(2026, 11, 18), commodities=["Tomato"])
+
+    assert len(obs) == 10
+    assert [int(r.url.params["offset"]) for r in seen] == [0, 3, 6, 9]
+
+
 def test_sends_state_commodity_and_date_filters() -> None:
     seen: list[httpx.Request] = []
     source = make_source(paged_handler(load_fixture(), seen))
@@ -134,6 +154,28 @@ def test_retries_timeouts_then_succeeds() -> None:
 
     assert len(obs) == 10
     assert calls["n"] == 3
+
+
+def test_backs_off_and_retries_when_rate_limited() -> None:
+    calls = {"n": 0}
+    waits: list[float] = []
+    good = paged_handler(load_fixture(), [])
+
+    def limited(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return httpx.Response(429, json={"error": "rate limited"})
+        response: httpx.Response = good(request)
+        return response
+
+    client = httpx.Client(transport=httpx.MockTransport(limited))
+    source = DataGovSource(api_key=FAKE_KEY, client=client, sleep=waits.append)
+
+    obs = source.fetch(day=date(2026, 11, 18), commodities=["Tomato"])
+
+    assert len(obs) == 10
+    assert len(waits) == 1
+    assert waits[0] > 0
 
 
 def test_gives_up_after_max_attempts() -> None:

@@ -31,6 +31,7 @@ REQUIRED_FIELDS = (
     "Modal_Price",
 )
 RETRYABLE = (httpx.TimeoutException, httpx.TransportError)
+RETRY_STATUS = {429, 502, 503, 504}
 
 
 def _price(raw: Any) -> float | None:
@@ -99,7 +100,8 @@ class DataGovSource:
             _check_schema(payload)
             records = payload.get("records") or []
             out.extend(parse_record(r) for r in records)
-            offset += self._page_size
+            # Step by rows actually returned: some keys cap pages below `limit`.
+            offset += len(records)
             if not records or offset >= int(payload.get("total", 0)):
                 return out
 
@@ -118,6 +120,10 @@ class DataGovSource:
             except RETRYABLE as e:
                 last_error = e
                 self._sleep(2.0 * (attempt + 1))
+                continue
+            if resp.status_code in RETRY_STATUS:
+                last_error = DataSourceError(f"HTTP {resp.status_code}")
+                self._sleep(5.0 * (attempt + 1))
                 continue
             if resp.status_code != 200:
                 # Never include the URL: it carries the API key.

@@ -1,0 +1,16 @@
+code,name,district,agmarknet_district,lat,lon,agmarknet_names,market_type,deductions_pct,verified,notes
+oddanchatram,Oddanchatram,Dindigul,Dindigul,10.4870,77.7480,Oddanchatram;Oddunchairum,wholesale,0.08,false,"Big vegetable market; older Agmarknet rows spell it Oddunchairum"
+dindigul,Dindigul,Dindigul,Dindigul,10.3624,77.9695,Dindigul,wholesale,0.08,false,
+palani,Palani,Dindigul,Dindigul,10.4500,77.5161,Palani,wholesale,0.08,false,"Palani(Uzhavar Sandhai ) is a different, retail market"
+coimbatore,Coimbatore,Coimbatore,Coimbatore,11.0168,76.9558,Coimbatore,wholesale,0.08,false,
+mettupalayam,Mettupalayam,Coimbatore,Coimbatore,11.2995,76.9350,Mettupalayam,wholesale,0.08,false,
+pollachi,Pollachi,Coimbatore,Coimbatore,10.6580,77.0080,Pollachi,wholesale,0.08,false,
+udumalpet,Udumalpet,Tiruppur,Thiruppur,10.5850,77.2480,Udumalpettai RM;Udumalpet,regulated,0.01,false,"Seen reporting banana on 18 Nov 2026"
+tiruppur,Tiruppur,Tiruppur,Thiruppur,11.1085,77.3411,Tiruppur,wholesale,0.08,false,
+erode,Erode,Erode,Erode,11.3410,77.7172,Erode,regulated,0.01,false,"Main turmeric market; reports Finger and Bulb"
+namagiripettai,Namagiripettai,Namakkal,Namakkal,11.4558,78.2683,Namagiripettai,regulated,0.01,false,"Turmeric market seen in history"
+salem,Salem,Salem,Salem,11.6643,78.1460,Salem,wholesale,0.08,false,
+perambalur,Perambalur,Perambalur,Perambalur,11.2333,78.8833,Perambalur,wholesale,0.08,false,"Small onion growing belt"
+madurai,Madurai,Madurai,Madurai,9.9252,78.1198,Madurai,wholesale,0.08,false,
+krishnagiri,Krishnagiri,Krishnagiri,Krishnagiri,12.5186,78.2138,Krishnagiri,wholesale,0.08,false,
+hosur,Hosur,Krishnagiri,Krishnagiri,12.7409,77.8253,Hosur,wholesale,0.08,false,
