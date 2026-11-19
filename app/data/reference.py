@@ -39,11 +39,13 @@ class Market(BaseModel):
 
     code: str
     name: str
+    name_ta: str
     district: str
     agmarknet_district: str
     lat: float
     lon: float
     agmarknet_names: tuple[str, ...]
+    aliases: tuple[str, ...]  # local names farmers use: English, transliterated, Tamil
     market_type: Literal["wholesale", "regulated"]
     deductions_pct: float
     verified: bool
@@ -81,6 +83,7 @@ def load_markets(path: Path = SEED_DIR / "markets.csv") -> tuple[Market, ...]:
             {
                 **row,
                 "agmarknet_names": tuple(n.strip() for n in row["agmarknet_names"].split(";")),
+                "aliases": tuple(a.strip().lower() for a in row["aliases"].split(";")),
                 "verified": row["verified"].strip().lower() == "true",
             }
         )

@@ -74,6 +74,21 @@ def test_market_aliases_are_unique_across_markets() -> None:
             seen[alias] = m.code
 
 
+def test_every_market_has_a_tamil_name_and_local_aliases() -> None:
+    for m in load_markets():
+        assert _is_tamil(m.name_ta), m.code
+        assert any(_is_tamil(a) for a in m.aliases), f"{m.code}: no Tamil-script alias"
+        assert m.name.lower() in m.aliases, f"{m.code}: English name missing from aliases"
+
+
+def test_local_aliases_do_not_collide_between_markets() -> None:
+    seen: dict[str, str] = {}
+    for m in load_markets():
+        for alias in m.aliases:
+            assert alias not in seen, f"'{alias}' used by {seen[alias]} and {m.code}"
+            seen[alias] = m.code
+
+
 def test_transport_vehicles_ordered_by_capacity_with_positive_rates() -> None:
     rates = load_transport_rates()
     capacities = [v.capacity_quintals for v in rates]
