@@ -32,3 +32,15 @@ refuses any database that isn't SQLite.
 **D-008 · Unverified crop mappings are served with a warning, not hidden.** Small onion and
 banana mappings aren't confirmed yet (see PHASE0_DATA.md §4). `/v1/advice` still answers but
 adds `commodity_mapping_unverified`; the bot must not present those prices as confirmed.
+
+**D-009 · Before consent, a conversation is keyed by a keyed hash of the phone number.** The
+chat has to remember a person's onboarding step before they say YES, but CLAUDE.md forbids
+storing farmer data before consent. So `conversations` is keyed by HMAC-SHA256(phone,
+`PHONE_HASH_SECRET`) and holds only the step and the language; the `farmers` row with the
+number is created on consent, and message logging starts with the consenting message.
+Declining deletes the conversation row.
+
+**D-010 · Claude parsing sends message text to Anthropic, and consent must say so.** With
+`INTENT_PROVIDER=anthropic`, each message's text (never the phone number or profile) goes to
+the Claude API. The consent text should mention this before the pilot; the rules parser
+(default) sends nothing anywhere.

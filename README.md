@@ -8,6 +8,7 @@ The full plan and architecture are in [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.m
 
 - **Phase 0 (data spike):** code done; waiting on API keys to run the 5-year backfill and the go/no-go on crops and mandis. Findings and open risks: [docs/PHASE0_DATA.md](docs/PHASE0_DATA.md).
 - **Phase 1 (core + engine):** code done. `POST /v1/advice` works end to end on demo data for all four crops; the exit check on real data waits for Phase 0. Engine coverage is 100%.
+- **Phase 2 (WhatsApp text bot):** code done: signed Twilio webhook, onboarding with consent, confirm-before-advise, Tamil and English replies, rules parser plus optional Claude Haiku parser. Next: connect the Twilio sandbox and run the 5-friend test, see [docs/WHATSAPP_SETUP.md](docs/WHATSAPP_SETUP.md).
 
 Design choices that differ from the plan are recorded in [docs/DECISIONS.md](docs/DECISIONS.md). The delivery plan is in §9 of the project plan.
 
